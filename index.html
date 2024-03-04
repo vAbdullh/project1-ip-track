@@ -40,7 +40,8 @@
     </header>
 
     <main>
-      <div class="container main-container">
+      <div class="container search-container">
+        <div class="container error-msg"><p id="error"></p></div>
         <div class="container search-bar">
           <input
             type="text"
@@ -48,28 +49,35 @@
             id="ip-input"
             placeholder="  Search for any IP address or domain"
           />
-          <button id="ip-start">&gt;</button>
-          <p id="error"></p>
+          <button id="event-btn">
+            <img src="images/icon-arrow.svg" alt="" />
+          </button>
         </div>
+      </div>
 
-        <div class="container">
-          <div class="inner-container">
-            <h2 id="title1">IP Address</h2>
-            <p id="result1"></p>
+      <div class="container parent-info-container">
+        <div class="info-container container">
+          <div class="output">
+            <h2 class="headers-info" id="title1">IP Address</h2>
+            <p class="result" id="result1"></p>
+          </div>
 
-            <h2 id="title2">Location</h2>
-            <p id="result2"></p>
-
-            <h2 id="title3">Timezone</h2>
-            <p id="result3"></p>
-
-            <h2 id="title4">ISP</h2>
-            <p id="result4"></p>
+          <div class="output">
+            <h2 class="headers-info" id="title2">Location</h2>
+            <p class="result" id="result2"></p>
+          </div>
+          <div class="output">
+            <h2 class="headers-info" id="title3">Timezone</h2>
+            <p class="result" id="result3"></p>
+          </div>
+          <div class="output">
+            <h2 class="headers-info" id="title4">ISP</h2>
+            <p class="result" id="result4"></p>
           </div>
         </div>
       </div>
       <div id="map"></div>
-      <footer class="attribution">
+      <footer class="attribution container">
         Challenge by
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
           >Frontend Mentor</a
