@@ -29,14 +29,13 @@ function ipVaild(ip) {
     }
 }
 // function below improved via chatGPT
-
 function loadMap(latitude, longitude) {
     function getRandomColor() {
         // Generate a random hexadecimal color code
         return '#' + Math.floor(Math.random() * 16777215).toString(16);
     }
     if (typeof latitude !== 'number' || typeof longitude !== 'number') {
-        errorMsg(new Error('Invalid latitude or longitude. Please try again.'));
+        errorMsg('Invalid latitude or longitude. Please try again.');
         return; // Halt further execution
     }
 
@@ -73,26 +72,22 @@ loadMap(24.743541, 46.677014);
 function errorMsg(error) {
     errorPTag.style.color = 'red';
     errorPTag.style.visibility = 'visible';
-    errorPTag.innerText = error.message;
+    errorPTag.innerText = error;
 }
-
 function errorHide() {
     if (errorPTag.style.visibility !== 'hidden') {
         errorPTag.style.visibility = 'hidden';
     }
 }
-document.getElementById('event-btn').addEventListener('click', () => {
+
+function fetchInfo() {
     ip = document.getElementById('ip-input').value;
-    if (!ipVaild(ip)) {
-        errorMsg(new Error('The IP Address Appears to be Incorrect'))
-        return;
-    }
     api_ipify = `https://geo.ipify.org/api/v2/country,city?apiKey=at_YJrnlb0WWZwCZxgpzT8BjGT2Ry72q&ipAddress=${ip}`;
 
     fetch(api_ipify)
         .then((response) => {
             if (!response.ok) {
-                errorMsg(new Error("Network response was not ok, try again"))
+                errorMsg("Network response was not ok, try again")
             }
             return response.json()
         }).then((data) => {
@@ -106,8 +101,23 @@ document.getElementById('event-btn').addEventListener('click', () => {
             loadMap(data.location.lat, data.location.lng)
         })
 
+}
 
 
+document.getElementById('ip-input').addEventListener('input', () => {
+    ip = document.getElementById('ip-input').value;
+    if (!ipVaild(ip)) {
+        errorMsg('The IP Address Appears to be Incorrect')
+    } else {
+        errorHide()
+        fetchInfo()
+
+    }
+})
+
+document.getElementById('event-btn').addEventListener('click', () => {
+    fetchInfo()
 });
 
-    
+
+
